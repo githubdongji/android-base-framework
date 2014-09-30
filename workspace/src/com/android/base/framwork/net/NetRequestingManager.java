@@ -4,20 +4,29 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class NetRequestingManager {
-	private Map<Integer,Integer> mMapCount;
+	private Map<RequestingDisplay,Integer> mMapCount;
+	
 	public NetRequestingManager(){
-		mMapCount = new HashMap<Integer, Integer>();
+		mMapCount = new HashMap<RequestingDisplay, Integer>();
 	}
-	public void addDisplay(RequestingDisplay display){
-		int key = display.hashCode();
-		if(mMapCount.containsKey(key)){
-			mMapCount.put(key, mMapCount.get(key)+1);
+	public void showDisplay(RequestingDisplay display){
+		if(display==null) return;
+		if(mMapCount.containsKey(display)){
+			mMapCount.put(display, mMapCount.get(display)+1);
 		}else{
-			mMapCount.put(key, 1);
+			mMapCount.put(display, 1);
+			display.show();
 		}
 	}
-	public void deleteDisplay(RequestingDisplay display){
-		
+	public void hideDisplay(RequestingDisplay display){
+		if(display==null) return;
+		if(mMapCount.containsKey(display)){
+			int count  = mMapCount.get(display);
+			count--;
+			if(count<=0){
+				display.hide();
+			}
+		}
 	}
 	
 	public interface RequestingDisplay{
