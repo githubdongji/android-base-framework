@@ -28,4 +28,7 @@ public class NetManager {
 	public void cancelAll(){
 		mQueue.cancelAll(ctx);
 	}
+	public void cancelByTag(Object tag){
+		mQueue.cancelAll(tag);
+	}
 }

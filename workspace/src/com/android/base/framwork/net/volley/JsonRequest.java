@@ -76,5 +76,9 @@ public class JsonRequest<T> extends VolleyRequest<T>{
 	public Object getTargetRequest() {
 		return jsonObjectRequest;
 	}
+	@Override
+	public void setTag(Object obj) {
+		jsonObjectRequest.setTag(obj);
+	}
 	
 }

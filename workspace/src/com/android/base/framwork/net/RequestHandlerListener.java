@@ -12,14 +12,16 @@ public abstract class RequestHandlerListener extends Handler implements RequestL
 	
 	private boolean isCancel=false;
 	private String id;
+	private Request  mRequest;
 	@Override
 	public void handleMessage(Message msg) {
 		if(isCancel)return;
 		switch(msg.what){
 		case MSG_START:
-			if(msg.obj!=null&&msg.obj instanceof String){
-				id = (String) msg.obj;
-				onStart(id);
+			if(msg.obj!=null&&msg.obj instanceof Request){
+				mRequest = (Request) msg.obj;
+				id = mRequest.getId();
+				onStart((Request)msg.obj);
 			}
 			break;
 		case MSG_SUCCESS:
@@ -33,7 +35,7 @@ public abstract class RequestHandlerListener extends Handler implements RequestL
 			}
 			break;
 		case MSG_END:
-			onEnd(id);
+			onEnd(mRequest);
 			break;
 		}
 	}
@@ -42,11 +44,11 @@ public abstract class RequestHandlerListener extends Handler implements RequestL
 		
 	}
 	@Override
-	public void onStart(String id) {
+	public void onStart(Request request) {
 		
 	}
 	@Override
-	public void onEnd(String id) {
+	public void onEnd(Request  request) {
 		
 	}
 	public void setCancel(boolean isCancel){

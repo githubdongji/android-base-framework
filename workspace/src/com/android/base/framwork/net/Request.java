@@ -33,7 +33,7 @@ public abstract class Request<T> {
 	public String onStart(){
 		id = java.util.UUID.randomUUID().toString();
 		if(listener!=null){
-			listener.obtainMessage(RequestHandlerListener.MSG_START,id).sendToTarget();
+			listener.obtainMessage(RequestHandlerListener.MSG_START,this).sendToTarget();
 		}
 		return id;
 	}
@@ -59,4 +59,8 @@ public abstract class Request<T> {
 	}
 	
 	public abstract Object getTargetRequest();
+	public abstract void setTag(Object obj);
+	public String getId(){
+		return id;
+	}
 }
